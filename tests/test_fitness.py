@@ -11,9 +11,6 @@ def test_latency():
     print(f"Latency: {latency:.4f} seconds")
     assert latency < 1
 
-# 2️⃣ test_throughput:
-# Procesa 10 datos y mide cuántas operaciones por segundo logra.
-# Considera exitoso si throughput > 1 op/sec (relajado para PoC).
 
 def test_throughput():
     count = 10
@@ -26,9 +23,6 @@ def test_throughput():
     print(f"Throughput: {throughput:.2f} ops/sec")
     assert throughput > 1
 
-# 3️⃣ test_error_rate:
-# Intenta procesar 10 datos y cuenta cuántos fallan.
-# Considera exitoso si error_rate < 10% (relajado para PoC).
 
 def test_error_rate():
     total = 10
