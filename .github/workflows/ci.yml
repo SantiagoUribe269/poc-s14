@@ -3,8 +3,6 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build:
@@ -18,11 +16,6 @@ jobs:
           POSTGRES_PASSWORD: sigetr123
         ports:
           - 5432:5432
-        options: >-
-          --health-cmd "pg_isready"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
       kafka:
         image: confluentinc/cp-kafka:latest
         ports:
@@ -35,8 +28,12 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run unit tests
+          pip install pyarchunit
+      - name: Architecture tests
         run: |
-          pytest
+          pytest tests/test_architecture.py
+      - name: Lint
+        run: flake8 src/ tests/
+      - name: Unit tests
+        run: pytest
