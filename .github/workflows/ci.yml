@@ -29,3 +29,5 @@ jobs:
 
     - name: Run tests
       run: pytest
+    - name: Run fitness tests
+      run: pytest tests/test_fitness.py -v
